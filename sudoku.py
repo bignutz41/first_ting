@@ -38,25 +38,64 @@ def main():
                 return
 
 class value:
-    def __init__(self, row, col, group):
+    def __init__(self, row, col, group, value, x, y, hover):
         self.row = row
         self.col = col
         self.group = group
+        self.value = value
+        self.x = x
+        self.y = y
+        self.hover = hover
+    def create_rect(x, y):
+        rect = pygame.Rect((x, y), (50, 50))
+    def check_hover(rect, clicked):
+        if pygame.mouse.get_pos() in rect:
+            hover = True
+        for event in pygame.event.get():
+            if event.type == pygame.MOUSEBUTTONDOWN and hover == True:
+                clicked = True
+        if clicked == True:
+            print("Clicked")
 
 
+
+
+
+
+def check_neighbours():
+    pass
 
 
 def populate_grid():
     x = 0
+    board_list = []
 
 
     for i in range(0, len(grid[0])):
         for j in range(0, len(grid[0])):
             if (0<grid[i][j]<10):
+                square_surface = pygame.Rect(((j+1)*50 - 12, (i+1)*50 - 25), (50, 50))
                 num_surface = font.render(str(grid[i][j]), True, (163, 39, 98))
                 window.blit(num_surface, ((j+1)*50 + 13, (i+1)*50))
-                value = value(i+1, j+1)
-
+                if i == 1 and j < 3:
+                    board_list += value((i+1), (j+1), 1, grid[i][j], ((j+1)*50 - 12), ((i+1)*50 + 25), False)
+                elif i == 1 and 2 < j < 6:
+                    board_list += value((i+1), (j+1), 2, grid[i][j], ((j+1)*50 - 12), ((i+1)*50 + 25), False)
+                elif i == 1 and 5 < j < 9:
+                    board_list += value((i+1), (j+1), 3, grid[i][j], ((j+1)*50 - 12), ((i+1)*50 + 25), False)
+                elif i == 2 and j < 3:
+                    
+                    board_list += value((i+1), (j+1), 4, grid[i][j], ((j+1)*50 - 12), ((i+1)*50 + 25), False)
+                elif i == 2 and 2 < j < 6:
+                    board_list += value((i+1), (j+1), 5, grid[i][j], ((j+1)*50 - 12), ((i+1)*50 + 25), False)
+                elif i == 2 and 5 < j < 9:
+                    board_list += value((i+1), (j+1), 6, grid[i][j], ((j+1)*50 - 12), ((i+1)*50 + 25), False)
+                elif i == 3 and j < 3:
+                    board_list += value((i+1), (j+1), 7, grid[i][j], ((j+1)*50 - 12), ((i+1)*50 + 25), False)
+                elif i == 3 and 2 < j < 6:
+                    board_list += value((i+1), (j+1), 8, grid[i][j], ((j+1)*50 - 12), ((i+1)*50 + 25), False)
+                elif i == 3 and 5 < j < 9:
+                    board_list += value((i+1), (j+1), 9, grid[i][j], ((j+1)*50 - 12), ((i+1)*50 + 25), False)
 
 
 
